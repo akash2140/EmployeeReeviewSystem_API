@@ -1,0 +1,13 @@
+const express = require("express");
+const passport = require("passport");
+const router = express.Router();
+const homeController = require("../controllers/home");
+router.get("/", homeController.home);
+router.get("/admin",passport.autherizedUser, homeController.admin);
+router.get("/admin/:id", passport.autherizedUser,homeController.employeeForAdmin);
+router.get("/employee",passport.autherizedUser, homeController.employee);
+router.use("/user", require("./user"));
+router.use("/performance", require("./performance"));
+router.use("/feedback", require("./feedback"));
+router.use("/request", require("./request"));
+module.exports = router;
